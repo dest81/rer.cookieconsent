@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
+from plone import api
 from operator import itemgetter
 from plone.app.vocabularies.language import AvailableContentLanguageVocabulary
-from zope.site.hooks import getSite
-from Products.CMFCore.utils import getToolByName
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
@@ -12,8 +11,7 @@ class SupportedContentLanguageVocabulary(AvailableContentLanguageVocabulary):
 
     def __call__(self, context):
         items = []
-        site = getSite()
-        ltool = getToolByName(site, 'portal_languages', None)
+        ltool = api.portal.get_tool('portal_languages')
         if ltool is not None:
             items = ltool.listSupportedLanguages()
             items.sort(key=itemgetter(1))

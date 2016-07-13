@@ -1,3 +1,25 @@
 <registry>
-    <records interface="rer.cookieconsent.controlpanel.interfaces.ICookieConsentSettings" />
+  <records interface="rer.cookieconsent.controlpanel.interfaces.ICookieConsentSettings" />
+
+  <!-- neihoppers theme js and css -->
+  <records prefix="plone.resources/rer-cookieconsent-cookiepolicy"
+        interface='Products.CMFPlone.interfaces.IResourceRegistry'>
+    <value key="js">++resource++rer.cookieconsent.resources/cookiepolicy.js</value>
+    <value key="css">
+      <element>++resource++rer.cookieconsent.resources/cookiepolicy.css</element>
+    </value>
+  </records>
+  <records prefix="plone.resources/rer-cookieconsent-utils"
+        interface='Products.CMFPlone.interfaces.IResourceRegistry'>
+  <value key="js">++resource++rer.cookieconsent.resources/utils.js</value>
+  </records>
+  <records prefix="plone.bundles/rer-cookieconsent-resources"
+        interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+    <value key="resources">
+      <element>rer-cookieconsent-cookiepolicy</element>
+      <element>rer-cookieconsent-utils</element>
+    </value>
+    <value key="enabled">True</value>
+    <value key="compile">True</value>
+  </records>
 </registry>

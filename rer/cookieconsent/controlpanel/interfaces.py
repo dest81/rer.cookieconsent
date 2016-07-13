@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
+from plone import api
 from rer.cookieconsent import messageFactory as _
 from zope import schema
 from zope.interface import Interface
 from zope.interface import implementer
 from plone.registry.field import PersistentField
 from z3c.form.object import registerFactoryAdapter
-from zope.component.hooks import getSite
 from zope.schema.vocabulary import SimpleVocabulary
 
 
@@ -16,8 +16,8 @@ trueFalseVocabulary = SimpleVocabulary.fromItems((
 
 
 def default_language():
-    site = getSite()
-    return site.portal_languages.getDefaultLanguage().decode('utf-8')
+    pl_tool = api.portal.get_tool('portal_languages')
+    return pl_tool.getDefaultLanguage().decode('utf-8')
 
 
 class ICookieBannerEntry(Interface):
@@ -116,7 +116,7 @@ class IOptOutEntrySubitem(Interface):
 
 
 class IOptOutEntry(Interface):
-    """Single entry for an Opt-Out application configuration 
+    """Single entry for an Opt-Out application configuration
     """
 
     app_id = schema.ASCIILine(

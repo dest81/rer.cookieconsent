@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from plone import api
 from zope.interface import implements
 from zope.component import adapts
 from zope.component import getSiteManager
@@ -8,7 +9,6 @@ from zope.component.interfaces import IComponentRegistry
 from Products.GenericSetup.interfaces import IBody
 from Products.GenericSetup.interfaces import ISetupEnviron
 from Products.GenericSetup.utils import XMLAdapterBase
-from Products.CMFCore.utils import getToolByName
 from rer.cookieconsent import logger
 from plone.registry.interfaces import IRegistry
 from zope.component import queryUtility
@@ -48,7 +48,7 @@ class CookieConsentXMLAdapter(XMLAdapterBase):
     def _configure(self, node):
         registry = queryUtility(IRegistry)
         settings = registry.forInterface(ICookieConsentSettings, check=False)
-        
+
         for child in node.childNodes:
             tagName, name = self.nodedata(child)
             if tagName=='property' and name.lower()=='accept-on-click':
@@ -80,7 +80,7 @@ class CookieConsentXMLAdapter(XMLAdapterBase):
                 if name=='lang':
                     # check if the language is valid for that site
                     lang = self._getNodeText(child).decode('utf-8')
-                    lang_tool =  getToolByName(self.context, 'portal_languages')
+                    lang_tool =  api.portal.get_tool('portal_languages')
                     if lang not in lang_tool.getSupportedLanguages():
                         logger.info("Can't configure %s language in that site" % lang)
                         return
@@ -121,7 +121,7 @@ class CookieConsentXMLAdapter(XMLAdapterBase):
         return results
 
     def _getValues(self, node):
-        """Returns a list of inner <element>s 
+        """Returns a list of inner <element>s
         """
         results = []
         for child in node.childNodes:

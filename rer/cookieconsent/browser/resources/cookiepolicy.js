@@ -11,8 +11,6 @@
   if (window.hasCookieConsent) return;
   window.hasCookieConsent = true;
 
-  var portal_url = window.portal_url || '';
-
   /*
    Constants
    */
@@ -369,6 +367,7 @@
         message: cookie_consent_configuration.text,
         accept: $labelsElement.find('accept').text(),
         reject: $labelsElement.find('reject').text(),
+        portal_url: bannerConfiguration.portal_url,
         accept_url: bannerConfiguration.here_url
           ? (bannerConfiguration.here_url + '/' + RESET_OPTOUT_COOKIES_VIEW + '?came_from=' + bannerConfiguration.actual_url)
           : 'javascript:void(0)',

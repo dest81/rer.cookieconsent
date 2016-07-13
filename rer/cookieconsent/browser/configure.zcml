@@ -7,7 +7,7 @@
     <browser:resourceDirectory
         name="rer.cookieconsent.resources"
         directory="resources"
-		layer="..interfaces.ICookieConsentLayer"
+		    layer="..interfaces.ICookieConsentLayer"
         />
 
     <browser:page
@@ -21,7 +21,7 @@
        name="optout-dashboard"
        for="plone.app.layout.navigation.interfaces.INavigationRoot"
        class=".dashboard.OptOutDashboardView"
-	   template="dashboard.pt"
+	     template="dashboard.pt"
        permission="zope2.View"
       />
 
