@@ -363,11 +363,11 @@
         cookie_consent_configuration = bannerConfiguration.cookie_consent_configuration[0];
       }
 
+      var portal_url = bannerConfiguration.portal_url;
       window.cookieconsent_options = {
         message: cookie_consent_configuration.text,
         accept: $labelsElement.find('accept').text(),
         reject: $labelsElement.find('reject').text(),
-        portal_url: bannerConfiguration.portal_url,
         accept_url: bannerConfiguration.here_url
           ? (bannerConfiguration.here_url + '/' + RESET_OPTOUT_COOKIES_VIEW + '?came_from=' + bannerConfiguration.actual_url)
           : 'javascript:void(0)',
